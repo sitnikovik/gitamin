@@ -1,0 +1,82 @@
+# Git branch rules.
+branch:
+  # The name of the default branch.
+  default: "master" # master, main, or any other branch name you use as default.
+  
+# Commit type rules to enforce consistency in commit messages.
+type:
+  # Whether the type is required in commit messages.
+  required: true
+  # List of allowed commit types.
+  # These types can be used to categorize commits, such as features, fixes, or chores.
+  list:
+    - feat
+    - patch
+    - fix
+    - chore
+    - refactor
+    - perf
+    - test
+    - docs
+    - build
+    - ci
+
+# Scope rules to specify the area of the codebase affected by the commit.
+scope:
+  # Whether the scope is required in commit messages.
+  # The scope helps to identify which part of the codebase the commit affects.
+  required: true
+  # Regular expression pattern for the scope.
+  pattern: "^[A-Za-z _-]+$"
+
+# Subject rules to enforce a specific format for the commit subject line.
+subject:
+  # Minimum length of the subject line.
+  min_length: 10
+  # Maximum length of the subject line.
+  max_length: 72
+
+# Body rules to enforce a specific format for the commit body.
+body:
+  # Minimum length of the commit body.
+  min_length: 20
+  # Maximum length of the commit body.
+  max_length: 1000
+  # Types of commits that require a body.
+  # The body provides additional context or details about the commit.
+  required_for_types:
+    - feat
+    - fix
+    - refactor
+    - perf
+    - docs
+  # Whether a body is required for breaking changes.
+  required_for_breaking_change: true
+  # Whether a blank line is required before the body.
+  require_blank_line: true
+
+# Task rules to enforce a specific format for task identifiers in commit messages.
+task:
+  # Whether a task identifier is required in commit messages.
+  required: true
+  # Regular expression pattern for the task identifier.
+  pattern: "(TASK|PROJ|BUG)-[0-9]+"
+  # Regular expression pattern for the branch name that includes the task identifier.
+  # This helps to link commits to specific tasks or issues.
+  branch_pattern: "feature/(TASK|PROJ|BUG)-[0-9]+"
+  # Required locations where the task identifier must be present.
+  location:
+    - subject
+    - branch
+
+# Forbidden rules to prevent some content in commit messages.
+forbidden:
+  # List of words or phrases that are not allowed in commit messages.
+  words:
+    - "WIP"
+    - "temp"
+    - "test commit"
+    - "debug"
+    - "fix bug"
+    - "quick fix"
+    - "update code"
